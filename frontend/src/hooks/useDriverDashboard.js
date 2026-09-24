@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_URL, SOCKET_URL } from "../../config/api.js";
+import { API_URL, SOCKET_URL } from "../config/api.js";
 
 function useDriverDashboard() {
   const [driver, setDriver] = useState(null);

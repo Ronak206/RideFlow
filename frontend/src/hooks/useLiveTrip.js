@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { io } from "socket.io-client";
 
-import { API_URL, SOCKET_URL } from "../../config/api.js";
+import { API_URL, SOCKET_URL } from "../config/api.js";
 
 function useLiveTrip(enabled) {
   const [liveLocation, setLiveLocation] = useState(null);
