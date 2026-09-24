@@ -15,7 +15,7 @@ function Home() {
   useEffect(() => {
     async function getCurrentUser() {
       try {
-        const response = await fetch(`${API_URL}/auth/me`, {
+        const response = await fetch(`${API_URL}/api/auth/me`, {
           method: "GET",
           credentials: "include",
         });
