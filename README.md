@@ -683,4 +683,6 @@ Rider history updates in real time
 
 ## 📄 License
 
-This project is a personal/portfolio ride-sharing application created for learning, development, and demonstration purposes.
+This project is a personal/portfolio ride-sharing application created for learning, development, and demonstration purposes.4
+
+**Built with ❤️ by Ronak Rathod | Open to contributions**
