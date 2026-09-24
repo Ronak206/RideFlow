@@ -74,7 +74,7 @@ function RiderHome() {
     try {
       setLoadingHistory(true);
 
-      const response = await fetch(`${API_URL}/trip/history`, {
+      const response = await fetch(`${API_URL}/api/trip/history`, {
         method: "GET",
         credentials: "include",
       });
@@ -120,7 +120,7 @@ function RiderHome() {
         setLoadingCurrentTrip(true);
       }
 
-      const response = await fetch(`${API_URL}/trip/current`, {
+      const response = await fetch(`${API_URL}/api/trip/current`, {
         method: "GET",
         credentials: "include",
       });
@@ -199,7 +199,7 @@ function RiderHome() {
     setDeletingTripId(tripId);
 
     try {
-      const response = await fetch(`${API_URL}/trip/${tripId}`, {
+      const response = await fetch(`${API_URL}/api/trip/${tripId}`, {
         method: "DELETE",
 
         headers: {
@@ -266,7 +266,7 @@ function RiderHome() {
 
     try {
       const response = await fetch(
-        `${API_URL}/trip/current/cancel`,
+        `${API_URL}/api/trip/current/cancel`,
         {
           method: "PATCH",
           credentials: "include",
@@ -455,7 +455,7 @@ function RiderHome() {
     try {
       setLoadingTrip(true);
 
-      const response = await fetch(`${API_URL}/trip`, {
+      const response = await fetch(`${API_URL}/api/trip`, {
         method: "POST",
 
         headers: {
