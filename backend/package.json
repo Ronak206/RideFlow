@@ -1,0 +1,26 @@
+{
+  "name": "rideflow",
+  "version": "1.0.0",
+  "description": "Making a Mini Uber-style Dispatch & Live Tracking System. ",
+  "license": "ISC",
+  "author": "ronak rathod",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.1",
+    "morgan": "^1.11.0",
+    "redis": "^6.2.1",
+    "socket.io": "^4.8.3"
+  }
+}

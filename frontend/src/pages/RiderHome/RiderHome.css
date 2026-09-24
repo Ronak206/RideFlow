@@ -1,0 +1,248 @@
+.rider-home {
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #111827;
+}
+
+.rider-header {
+  height: 64px;
+  padding: 0 40px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rider-logo {
+  font-size: 21px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.rider-logout {
+  padding: 9px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: white;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rider-logout:hover {
+  background: #f3f4f6;
+}
+
+.rider-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+.rider-welcome {
+  margin-bottom: 35px;
+}
+
+.rider-label {
+  margin: 0 0 10px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.rider-welcome h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.2;
+  color: #111827;
+}
+
+.rider-welcome p:last-child {
+  margin-top: 12px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.ride-search-card {
+  padding: 28px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.ride-search-card h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+}
+
+.ride-inputs {
+  display: flex;
+  gap: 14px;
+}
+
+.ride-input {
+  flex: 1;
+  height: 50px;
+  padding: 0 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+}
+
+.ride-input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.find-ride-button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 13px;
+
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.find-ride-button:hover {
+  background: #1d4ed8;
+}
+
+.rider-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.rider-option-card {
+  padding: 22px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.option-icon {
+  font-size: 28px;
+}
+
+.rider-option-card h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.rider-option-card p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .rider-header {
+    padding: 0 20px;
+  }
+
+  .rider-content {
+    padding: 40px 18px;
+  }
+
+  .rider-welcome h1 {
+    font-size: 30px;
+  }
+
+  .ride-inputs {
+    flex-direction: column;
+  }
+
+  .rider-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ride-map-section {
+  margin-top: 30px;
+}
+
+.ride-map-section h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.current-trip-section,
+.trip-history-section {
+  margin-top: 30px;
+}
+
+.current-trip-card,
+.trip-history-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.current-trip-card {
+  display: flex;
+  gap: 50px;
+}
+
+.trip-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.trip-history-card {
+  display: flex;
+  gap: 40px;
+}
+
+.current-trip-card p,
+.trip-history-card p {
+  margin: 5px 0 0;
+}
+
+.cancel-trip-button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #dc2626;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-trip-button:hover {
+  background: #b91c1c;
+}
+
+.cancel-trip-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
