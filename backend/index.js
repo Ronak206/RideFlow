@@ -22,7 +22,7 @@ require("dotenv").config();
 
 const app = express();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // Create Http Server
 const server = http.createServer(app);
@@ -64,6 +64,6 @@ app.use("/api/user", userRoutes);
 app.use("/api/driver", driverRoutes);
 app.use("/api/trip", tripRoutes);
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running at port:${PORT}`);
 });
