@@ -18,6 +18,8 @@ import LiveRideModal from "../../component/driver/LiveRideModal.jsx";
 
 import RideMap from "../../component/RideMap.jsx";
 
+import { API_URL, SOCKET_URL } from "../../config/api.js";
+
 function DriverHome() {
   const [driver, setDriver] = useState(null);
 
@@ -131,7 +133,7 @@ function DriverHome() {
 
       setMessage("");
 
-      const response = await fetch("http://localhost:8000/api/trip/complete", {
+      const response = await fetch(`${API_URL}/trip/complete`, {
         method: "PATCH",
 
         headers: {
@@ -199,7 +201,7 @@ function DriverHome() {
   // ==========================================
 
   useEffect(() => {
-    const socket = io("http://localhost:8000", {
+    const socket = io(`${SOCKET_URL}`, {
       withCredentials: true,
     });
 
@@ -445,7 +447,7 @@ function DriverHome() {
 
       setError("");
 
-      const response = await fetch("http://localhost:8000/api/driver", {
+      const response = await fetch(`${API_URL}/api/driver`, {
         method: "GET",
 
         credentials: "include",
@@ -477,7 +479,7 @@ function DriverHome() {
     try {
       setLoadingTrips(true);
 
-      const response = await fetch("http://localhost:8000/api/trip/", {
+      const response = await fetch(`${API_URL}/api/trip/`, {
         method: "GET",
         credentials: "include",
       });
@@ -509,14 +511,11 @@ function DriverHome() {
         return;
       }
 
-      const response = await fetch(
-        `http://localhost:8000/api/trip/${driverId}`,
-        {
-          method: "GET",
+      const response = await fetch(`${API_URL}/api/trip/${driverId}`, {
+        method: "GET",
 
-          credentials: "include",
-        },
-      );
+        credentials: "include",
+      });
 
       const data = await response.json();
 
@@ -615,7 +614,7 @@ function DriverHome() {
 
       const newStatus = driver.status === "online" ? "offline" : "online";
 
-      const response = await fetch("http://localhost:8000/api/driver/status", {
+      const response = await fetch(`${API_URL}/api/driver/status`, {
         method: "PATCH",
 
         headers: {
@@ -678,7 +677,7 @@ function DriverHome() {
 
       setMessage("");
 
-      const response = await fetch("http://localhost:8000/api/trip/", {
+      const response = await fetch(`${API_URL}/api/trip/`, {
         method: "PATCH",
 
         headers: {
@@ -750,7 +749,7 @@ function DriverHome() {
 
       setMessage("");
 
-      const response = await fetch("http://localhost:8000/api/trip/start", {
+      const response = await fetch(`${API_URL}/api/trip/start`, {
         method: "PATCH",
 
         headers: {
@@ -813,14 +812,11 @@ function DriverHome() {
 
       setMessage("");
 
-      const response = await fetch(
-        "http://localhost:8000/api/trip/current/cancel",
-        {
-          method: "PATCH",
+      const response = await fetch(`${API_URL}/api/trip/current/cancel`, {
+        method: "PATCH",
 
-          credentials: "include",
-        },
-      );
+        credentials: "include",
+      });
 
       const data = await response.json();
 

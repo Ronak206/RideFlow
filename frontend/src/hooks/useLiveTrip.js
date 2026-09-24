@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { io } from "socket.io-client";
 
+import { API_URL, SOCKET_URL } from "../../config/api.js";
+
 function useLiveTrip(enabled) {
   const [liveLocation, setLiveLocation] = useState(null);
 
@@ -33,13 +35,10 @@ function useLiveTrip(enabled) {
         setLiveLoading(true);
         setLiveError("");
 
-        const response = await fetch(
-          "http://localhost:8000/api/trip/current/live",
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${API_URL}/api/trip/current/live`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         const data = await response.json();
 
@@ -53,7 +52,7 @@ function useLiveTrip(enabled) {
           setLiveUpdatedAt(data.liveTrip.updatedAt || null);
         }
 
-        socket = io("http://localhost:8000", {
+        socket = io(`${SOCKET_URL}`, {
           withCredentials: true,
         });
 

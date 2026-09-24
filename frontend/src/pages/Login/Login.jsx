@@ -1,134 +1,113 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { API_URL, SOCKET_URL } from "../../config/api.js";
 
 function Login() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        email: "",
-        password: ""
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
     });
+  }
 
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-    function handleChange(e) {
-        const { name, value } = e.target;
+    setError("");
 
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+    if (!formData.email || !formData.password) {
+      setError("Please enter email and password");
+      return;
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
+    setLoading(true);
 
-        setError("");
+    try {
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
 
-        if (!formData.email || !formData.password) {
-            setError("Please enter email and password");
-            return;
-        }
+      const result = await response.json();
 
-        setLoading(true);
+      if (!response.ok) {
+        setError(result.message || "Login failed");
+        return;
+      }
 
-        try {
-            const response = await fetch(
-                "http://localhost:8000/api/auth/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "include",
-                    body: JSON.stringify(formData)
-                }
-            );
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                setError(result.message || "Login failed");
-                return;
-            }
-
-            // Login successful
-            navigate("/home");
-
-        } catch (error) {
-            console.error(error);
-            setError("Unable to connect to server");
-        } finally {
-            setLoading(false);
-        }
+      // Login successful
+      navigate("/home");
+    } catch (error) {
+      console.error(error);
+      setError("Unable to connect to server");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    return (
-        <div className="login-page">
+  return (
+    <div className="login-page">
+      <div className="login-card">
+        <h1>RiderFlow</h1>
 
-            <div className="login-card">
+        <p className="login-subtitle">Welcome back 👋</p>
 
-                <h1>RiderFlow</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email</label>
 
-                <p className="login-subtitle">
-                    Welcome back 👋
-                </p>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
 
-                <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Password</label>
 
-                    <div className="input-group">
-                        <label>Email</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
 
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                    </div>
+          {error && <p className="error-message">{error}</p>}
 
-                    <div className="input-group">
-                        <label>Password</label>
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
 
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {error && (
-                        <p className="error-message">
-                            {error}
-                        </p>
-                    )}
-
-                    <button
-                        type="submit"
-                        className="login-button"
-                        disabled={loading}
-                    >
-                        {loading ? "Logging in..." : "Login"}
-                    </button>
-
-                </form>
-
-                <p className="signup-link">
-                    Don't have an account?{" "}
-                    <span onClick={() => navigate("/signup")}>
-                        Sign up
-                    </span>
-                </p>
-
-            </div>
-
-        </div>
-    );
+        <p className="signup-link">
+          Don't have an account?{" "}
+          <span onClick={() => navigate("/signup")}>Sign up</span>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

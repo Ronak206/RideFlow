@@ -10,6 +10,8 @@ import useLiveTrip from "../../hooks/useLiveTrip.js";
 
 import { io } from "socket.io-client";
 
+import { API_URL, SOCKET_URL } from "../../config/api.js";
+
 function RiderHome() {
   const navigate = useNavigate();
 
@@ -72,7 +74,7 @@ function RiderHome() {
     try {
       setLoadingHistory(true);
 
-      const response = await fetch("http://localhost:8000/api/trip/history", {
+      const response = await fetch(`${API_URL}/trip/history`, {
         method: "GET",
         credentials: "include",
       });
@@ -118,7 +120,7 @@ function RiderHome() {
         setLoadingCurrentTrip(true);
       }
 
-      const response = await fetch("http://localhost:8000/api/trip/current", {
+      const response = await fetch(`${API_URL}/trip/current`, {
         method: "GET",
         credentials: "include",
       });
@@ -151,7 +153,7 @@ function RiderHome() {
   // ==========================================
 
   useEffect(() => {
-    const socket = io("http://localhost:8000", {
+    const socket = io(`${SOCKET_URL}`, {
       withCredentials: true,
     });
 
@@ -197,7 +199,7 @@ function RiderHome() {
     setDeletingTripId(tripId);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/trip/${tripId}`, {
+      const response = await fetch(`${API_URL}/trip/${tripId}`, {
         method: "DELETE",
 
         headers: {
@@ -264,7 +266,7 @@ function RiderHome() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/trip/current/cancel",
+        `${API_URL}/trip/current/cancel`,
         {
           method: "PATCH",
           credentials: "include",
@@ -453,7 +455,7 @@ function RiderHome() {
     try {
       setLoadingTrip(true);
 
-      const response = await fetch("http://localhost:8000/api/trip", {
+      const response = await fetch(`${API_URL}/trip`, {
         method: "POST",
 
         headers: {

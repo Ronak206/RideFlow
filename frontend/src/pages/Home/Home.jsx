@@ -4,81 +4,67 @@ import { useNavigate } from "react-router-dom";
 import RiderHome from "../RiderHome/RiderHome.jsx";
 import DriverHome from "../DriverHome/DriverHome.jsx";
 
+import { API_URL, SOCKET_URL } from "../../config/api.js";
+
 function Home() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function getCurrentUser() {
-            try {
-                const response = await fetch(
-                    "http://localhost:8000/api/auth/me",
-                    {
-                        method: "GET",
-                        credentials: "include"
-                    }
-                );
+  useEffect(() => {
+    async function getCurrentUser() {
+      try {
+        const response = await fetch(`${API_URL}/auth/me`, {
+          method: "GET",
+          credentials: "include",
+        });
 
-                console.log("ME status:", response.status);
+        console.log("ME status:", response.status);
 
-                const data = await response.json();
+        const data = await response.json();
 
-                console.log("ME response:", data);
+        console.log("ME response:", data);
 
-                if (!response.ok) {
-                    console.log("Not authenticated");
-                    navigate("/login");
-                    return;
-                }
-
-                console.log("User received:", data.user);
-
-                setUser(data.user);
-
-            } catch (error) {
-                console.error("ME error:", error);
-                navigate("/login");
-            } finally {
-                setLoading(false);
-            }
+        if (!response.ok) {
+          console.log("Not authenticated");
+          navigate("/login");
+          return;
         }
 
-        getCurrentUser();
-    }, [navigate]);
+        console.log("User received:", data.user);
 
-    if (loading) {
-        return (
-            <div>
-                Loading...
-            </div>
-        );
+        setUser(data.user);
+      } catch (error) {
+        console.error("ME error:", error);
+        navigate("/login");
+      } finally {
+        setLoading(false);
+      }
     }
 
-    if (!user) {
-        return (
-            <div>
-                No user found
-            </div>
-        );
-    }
+    getCurrentUser();
+  }, [navigate]);
 
-    console.log("Current role:", user.role);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    if (user.role === "driver") {
-        return <DriverHome />;
-    }
+  if (!user) {
+    return <div>No user found</div>;
+  }
 
-    if (user.role === "rider") {
-        return <RiderHome />;
-    }
+  console.log("Current role:", user.role);
 
-    return (
-        <div>
-            Unknown role: {user.role}
-        </div>
-    );
+  if (user.role === "driver") {
+    return <DriverHome />;
+  }
+
+  if (user.role === "rider") {
+    return <RiderHome />;
+  }
+
+  return <div>Unknown role: {user.role}</div>;
 }
 
 export default Home;

@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 
+import { API_URL, SOCKET_URL } from "../../config/api.js";
+
 function useDriverLocation({
   setLiveLocation,
   setLiveRoute,
@@ -14,7 +16,7 @@ function useDriverLocation({
   // SOCKET.IO + LIVE GPS
 
   useEffect(() => {
-    const socket = io("http://localhost:8000", {
+    const socket = io(`${SOCKET_URL}`, {
       withCredentials: true,
     });
 
